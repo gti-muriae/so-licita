@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model cadastra {
+  fk_prefeitura_CODPREFEITURA Int?
+  fk_licitacao_CODLIC         Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model classifica {
+  fk_rup_COD  Int?
+  fk_cnae_COD Int?
+
+  @@ignore
+}
+
+model cnae {
+  COD       Int     @id
+  DESCRICAO String? @db.VarChar(30)
+}
+
+model licitacao {
+  CODLIC      Int       @id
+  NUM_LIC     String?   @db.VarChar(30)
+  CATEGORIA   String?   @db.VarChar(30)
+  DESCRICAO   String?   @db.VarChar(30)
+  DATA_INICIO DateTime? @db.Date
+  DATA_FINAL  DateTime? @db.Date
+  DATA_AMM    DateTime? @db.Date
+  LINK        String?   @db.VarChar(50)
+}
+
+model permissaopagina {
+  CODTELA    Int     @id
+  CODUSUARIO Int?
+  VERTELA    String? @db.VarChar(30)
+}
+
+model prefeitura {
+  CODPREFEITURA           Int     @id
+  NOME                    String? @db.VarChar(30)
+  ENDEDRECO               String? @db.VarChar(30)
+  NUM_ENDERECO            Int?
+  COMPLEMENTO             String? @db.VarChar(30)
+  BAIRRO                  String? @db.VarChar(30)
+  CIDADE                  String? @db.VarChar(30)
+  UF                      String? @db.VarChar(30)
+  CEP                     Int?
+  fk_usuario_rup_CONTROLE Int?
+  fk_usuario_rup_COD      Int?
+}
+
+model telas {
+  CODTELA Int     @id
+  NOMEJS  String? @db.VarChar(30)
+  TITULO  String? @db.VarChar(30)
+  ICONE   String? @db.VarChar(30)
+}
+
+model usuario_rup {
+  CONTROLE     Int
+  APELIDO      String?   @db.VarChar(30)
+  SENHA        String?   @db.VarChar(10)
+  EMAIL        String?   @db.VarChar(30)
+  FONECEL      String?   @db.VarChar(9)
+  CPF          Int?
+  IE           Int?
+  DTABERTURA   DateTime? @db.Date
+  NOME         String?   @db.VarChar(30)
+  ENDERECO     String?   @db.VarChar(30)
+  NUM_ENDERECO Int?
+  COMPLEMENTO  String?   @db.VarChar(30)
+  BAIRRO       String?   @db.VarChar(30)
+  CIDADE       String?   @db.VarChar(20)
+  UF           String?   @db.VarChar(2)
+  CEP          Int?
+  COD          Int
+  RAZAOSOCIAL  String?   @db.VarChar(50)
+  CNPJ         Int?
+
+  @@id([CONTROLE, COD])
+}
