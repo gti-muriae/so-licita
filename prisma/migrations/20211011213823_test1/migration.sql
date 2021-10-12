@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `usuario_rup` MODIFY `DTABERTURA` VARCHAR(30);
