@@ -13,7 +13,7 @@ const storageFile = {
         },
         filename: (request, file, cb) => {
             randomBytes(10, (err, hash) => {
-                if (err) cb(err,'');
+                if (err) cb(err, '');
             });
         }
     }),
