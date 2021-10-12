@@ -35,7 +35,7 @@ export class UsuarioRup {
             }
         });
         if (userExist) {
-            throw new Error('Usuario já cadastrado');
+            throw new Error('Usuario ja cadastrado');
         }
         const hashSenha = hashSync(senha, 10);
 
