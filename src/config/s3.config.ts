@@ -1,20 +1,60 @@
-import AWS from 'aws-sdk';
+import multer from 'multer';
+import path from 'path';
+import { randomBytes } from 'crypto';
+import aws from 'aws-sdk'
+import multerS3 from 'multer-s3';
 import dotenv from 'dotenv';
-import fs from 'fs'
-
 dotenv.config();
 
-const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-});
+const storageFile = {
+    local: multer.diskStorage({
+        destination: (request, file, callback) => {
+            callback(null, path.resolve(__dirname, "..", "..", "tmp", "files"));
+        },
+        filename: (request, file, cb) => {
+            randomBytes(10, (err, hash) => {
+                if (err) cb(err,'');
+            });
+        }
+    }),
+    s3: multerS3({
+        s3: new aws.S3(),
+        bucket: process.env.AWS_BUCKET!,
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: "public-read",
+        key: (request, file, callback) => {
+            randomBytes(10, (err, hash) => {
+                if (err) callback(err);
+                const filename = `${hash.toString("hex")}-${file.originalname}`;
+                callback(null, filename);
+            });
+        }
+    })
 
-export async function uploadFile({ filename, filePath, mineType }) {
-    const file = fs.readFileSync(filePath)
+};
+export = {
+    dest: path.resolve(__dirname, "..", "..", "tmp", "files"),
+    storage: storageFile['local'],
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    },
+    fileFilter: (request: string, file: { mimetype: string; }, callback: any) => {
+        const allow = [
+            "files/pdf"
+        ];
 
-    const data = await s3.upload({
-        Bucket: process.env.S3_BUCKET,
-        Key: filename,
-        Body: file
-    }).promise();
-}
+        if (allow.includes(file.mimetype)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Arquivo inválido"))
+        }
+    }
+
+};
+
+
+
+
+
+
+
