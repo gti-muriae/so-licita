@@ -68,24 +68,24 @@ model telas {
 
 model usuario_rup {
   CONTROLE     Int
-  APELIDO      String?   @db.VarChar(30)
-  SENHA        String?   @db.VarChar(10)
-  EMAIL        String?   @db.VarChar(30)
-  FONECEL      String?   @db.VarChar(9)
-  CPF          Int?
+  APELIDO      String? @db.VarChar(30)
+  SENHA        String? @db.VarChar(100)
+  EMAIL        String? @db.VarChar(30)
+  FONECEL      String? @db.VarChar(9)
+  CPF          String? @db.VarChar(12)
   IE           Int?
-  DTABERTURA   DateTime? @db.Date
-  NOME         String?   @db.VarChar(30)
-  ENDERECO     String?   @db.VarChar(30)
+  DTABERTURA   String? @db.VarChar(20)
+  NOME         String? @db.VarChar(30)
+  ENDERECO     String? @db.VarChar(30)
   NUM_ENDERECO Int?
-  COMPLEMENTO  String?   @db.VarChar(30)
-  BAIRRO       String?   @db.VarChar(30)
-  CIDADE       String?   @db.VarChar(20)
-  UF           String?   @db.VarChar(2)
+  COMPLEMENTO  String? @db.VarChar(30)
+  BAIRRO       String? @db.VarChar(30)
+  CIDADE       String? @db.VarChar(20)
+  UF           String? @db.VarChar(2)
   CEP          Int?
   COD          Int
-  RAZAOSOCIAL  String?   @db.VarChar(50)
-  CNPJ         Int?
+  RAZAOSOCIAL  String? @db.VarChar(50)
+  CNPJ         String? @db.VarChar(20)
 
   @@id([CONTROLE, COD])
 }

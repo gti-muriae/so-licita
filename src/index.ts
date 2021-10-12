@@ -8,7 +8,6 @@ const application: express.Application = express();
 dontenv.config();
 application.use(morgan('dev'))
 application.use(express.json());
-
 application.use(router);
 
 application.use((err: Error, req: Request, res: Response, next: NextFunction) => {
