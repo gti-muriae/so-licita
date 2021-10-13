@@ -9,22 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsuarioRupController = void 0;
-const usuarioRup_1 = require("../services/usuarioRup");
-const service = new usuarioRup_1.UsuarioRup();
-class UsuarioRupController {
-    create(request, response) {
+exports.PrefeituraController = void 0;
+const prefeituraService_1 = require("../services/prefeituraService");
+const service = new prefeituraService_1.PrefeituraServices();
+class PrefeituraController {
+    register(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield service.createUsuario(request.body);
-            return response.status(201).json(user);
-        });
-    }
-    signUsuarioRup(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const user = yield service.signUSuarioRup(request.body);
-            return response.status(200).json(user);
+            const prefeitura = yield service.register(request.body);
+            return response.status(201).json(prefeitura);
         });
     }
 }
-exports.UsuarioRupController = UsuarioRupController;
-//# sourceMappingURL=UsuarioRupController.js.map
+exports.PrefeituraController = PrefeituraController;
+//# sourceMappingURL=PrefeituraController.js.map

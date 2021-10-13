@@ -32,7 +32,7 @@ const storageFile = {
     })
 
 };
-export = {
+module.exports = {
     dest: path.resolve(__dirname, "..", "..", "tmp", "files"),
     storage: storageFile['local'],
     limits: {
