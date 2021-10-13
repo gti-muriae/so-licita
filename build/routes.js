@@ -8,9 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
@@ -20,8 +17,7 @@ const usuarioRupController = new UsuarioRupController_1.UsuarioRupController();
 const prefeituraController = new PrefeituraController_1.PrefeituraController();
 const router = (0, express_1.Router)();
 exports.router = router;
-const multer_1 = __importDefault(require("multer"));
-const s3_config_1 = __importDefault(require("./config/s3.config"));
+const s3_config_1 = require("./config/s3.config");
 const licitacao_1 = require("./services/licitacao");
 //UsuarioRup
 router.post('/usuario/cadastrado', usuarioRupController.create);
@@ -33,8 +29,17 @@ router.post("/licitacao/registro", (req, res) => __awaiter(void 0, void 0, void 
     const licitacao = yield (0, licitacao_1.register)(req.body);
     return res.status(201).json(licitacao);
 }));
-router.post('/licitacao/upload', (0, multer_1.default)(s3_config_1.default).single("file"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/licitacao/upload/:codlic', s3_config_1.uploadS3.single('file'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { location: url = "" } = req.file;
-    return res.status(200).json(url);
+    const { codlic } = req.params;
+    yield (0, licitacao_1.updateLink)(parseInt(codlic), url).then((index) => {
+        console.log(index);
+        return res.status(200).json({
+            message: "upload feito com sucesso"
+        });
+    }).catch((err) => {
+        console.log(err);
+        return res.status(400).json({});
+    });
 }));
 //# sourceMappingURL=routes.js.map

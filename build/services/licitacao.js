@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.register = void 0;
+exports.updateLink = exports.register = void 0;
 const client_1 = require(".prisma/client");
 const prisma = new client_1.PrismaClient();
 function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, urllic }) {
@@ -32,4 +32,23 @@ function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal,
     });
 }
 exports.register = register;
+function updateLink(codlic, url) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(codlic + url);
+        yield prisma.licitacao.update({
+            where: {
+                CODLIC: codlic
+            }, data: {
+                LINK: url
+            }
+        }).then((index) => {
+            console.log(index);
+            return index;
+        }).catch((err) => {
+            console.log(err);
+            throw new Error('Houve um error ao atualizar link do arquivo');
+        });
+    });
+}
+exports.updateLink = updateLink;
 //# sourceMappingURL=licitacao.js.map

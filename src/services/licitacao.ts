@@ -12,7 +12,7 @@ interface ILicitacaoRequest {
     urllic: string;
 }
 
-export async function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, urllic }: ILicitacaoRequest) {
+async function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, urllic }: ILicitacaoRequest) {
     const licitacao = await prisma.licitacao.findFirst({
         where: {
             CODLIC: codlic
@@ -30,3 +30,28 @@ export async function register({ codlic, numlic, categoria, descricao, dataInici
     })
 
 }
+
+async function updateLink(codlic: number, url: string): Promise<void> {
+    console.log(codlic + url);
+
+    await prisma.licitacao.update({
+        where: {
+            CODLIC: codlic
+        }, data: {
+            LINK: url
+        }
+    }).then((index) => {
+        console.log(index);
+        return index;
+    }).catch((err) => {
+        console.log(err);
+        throw new Error('Houve um error ao atualizar link do arquivo');
+    });
+
+
+}
+export {
+    register
+    , updateLink
+}
+

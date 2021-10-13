@@ -10,12 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LicitacaoController = void 0;
-const licitacao_1 = require("../services/licitacao");
 class LicitacaoController {
     register(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const licitacao = yield (0, licitacao_1.register)(request.body);
-            return response.status(201).json(licitacao);
         });
     }
 }

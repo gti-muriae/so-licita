@@ -36,7 +36,7 @@ model licitacao {
   DATA_INICIO String? @db.VarChar(30)
   DATA_FINAL  String? @db.VarChar(30)
   DATA_AMM    String? @db.VarChar(30)
-  LINK        String? @db.VarChar(50)
+  LINK        String? @db.VarChar(100)
 }
 
 model permissaopagina {
