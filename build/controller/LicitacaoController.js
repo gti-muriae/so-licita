@@ -9,12 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LicitacaoController = void 0;
-class LicitacaoController {
-    register(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-        });
-    }
+exports.registerLicitacao = void 0;
+const licitacao_1 = require("../services/licitacao");
+function registerLicitacao(request, response) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const licitacao = yield (0, licitacao_1.register)(request.body);
+        return response.status(201).json(licitacao);
+    });
 }
-exports.LicitacaoController = LicitacaoController;
+exports.registerLicitacao = registerLicitacao;
 //# sourceMappingURL=LicitacaoController.js.map

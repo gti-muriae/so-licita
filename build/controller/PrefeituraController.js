@@ -9,16 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrefeituraController = void 0;
+exports.registerPrefeitura = void 0;
 const prefeituraService_1 = require("../services/prefeituraService");
 const service = new prefeituraService_1.PrefeituraServices();
-class PrefeituraController {
-    register(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const prefeitura = yield service.register(request.body);
-            return response.status(201).json(prefeitura);
-        });
-    }
+function registerPrefeitura(request, response) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const prefeitura = yield service.register(request.body);
+        return response.status(201).json(prefeitura);
+    });
 }
-exports.PrefeituraController = PrefeituraController;
+exports.registerPrefeitura = registerPrefeitura;
 //# sourceMappingURL=PrefeituraController.js.map

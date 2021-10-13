@@ -1,39 +1,34 @@
 import { Router } from "express";
-import { PrefeituraController } from "./controller/PrefeituraController";
-import { UsuarioRupController } from "./controller/UsuarioRupController";
-const usuarioRupController = new UsuarioRupController();
-const prefeituraController = new PrefeituraController();
-const router = Router();
 import { uploadS3 } from './config/s3.config';
-import { register, updateLink } from "./services/licitacao";
+import { registerLicitacao } from "./controller/LicitacaoController";
+import { registerPrefeitura } from "./controller/PrefeituraController";
+import { createUsuarioRup, signUsuarioRup } from "./controller/UsuarioRupController";
+import { updateLink } from "./services/licitacao";
+
+const router = Router();
 
 
 //UsuarioRup
-router.post('/usuario/cadastrado', usuarioRupController.create);
-router.post('/usuario/login', usuarioRupController.signUsuarioRup);
+router.post('/usuario/cadastrado', createUsuarioRup);
+router.post('/usuario/login', signUsuarioRup);
 
 //prefeitura
-router.post('/prefeitura/register', prefeituraController.register);
+router.post('/prefeitura/register', registerPrefeitura);
 
-router.post("/licitacao/registro", async (req, res) => {
-    console.log(req.body);
-    const licitacao = await register(
-        req.body
-    );
-    return res.status(201).json(licitacao);
+//Licitação
+router.post("/licitacao/registro", registerLicitacao);
 
-});
+//uploadS3
 router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, res) => {
     const { location: url = "" } = req.file;
     const { codlic } = req.params;
     await updateLink(parseInt(codlic), url).then((index) => {
-        console.log(index);
         return res.status(200).json({
-            message: "upload feito com sucesso"
+            message: "upload feito com sucesso",
+            data: index
         });
     }).catch((err) => {
-        console.log(err);
-        return res.status(400).json({});
+        return res.status(400).json("Error upload");
     });
 
 
@@ -41,4 +36,4 @@ router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, re
 
 export {
     router
-}
+};
