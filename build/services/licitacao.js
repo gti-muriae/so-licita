@@ -12,12 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.register = void 0;
 const client_1 = require(".prisma/client");
 const prisma = new client_1.PrismaClient();
-function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, link }) {
+function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, urllic }) {
     return __awaiter(this, void 0, void 0, function* () {
         const licitacao = yield prisma.licitacao.findFirst({
             where: {
-                CODLIC: codlic,
-                NUM_LIC: numlic
+                CODLIC: codlic
             }
         });
         if (licitacao) {
@@ -25,8 +24,10 @@ function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal,
         }
         return yield prisma.licitacao.create({
             data: {
-                CODLIC: codlic, NUM_LIC: numlic, CATEGORIA: categoria, DESCRICAO: descricao, DATA_INICIO: dataInicio, DATA_FINAL: dataFinal, DATA_AMM: dataAmm, LINK: link
+                CODLIC: codlic, NUM_LIC: numlic, CATEGORIA: categoria, DESCRICAO: descricao, DATA_INICIO: dataInicio, DATA_FINAL: dataFinal, DATA_AMM: dataAmm, LINK: urllic
             }
+        }).catch((err) => {
+            console.log(err);
         });
     });
 }

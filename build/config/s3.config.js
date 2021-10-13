@@ -13,12 +13,15 @@ dotenv_1.default.config();
 const storageFile = {
     local: multer_1.default.diskStorage({
         destination: (request, file, callback) => {
-            callback(null, path_1.default.resolve(__dirname, "..", "..", "tmp", "files"));
+            callback(null, path_1.default.resolve(__dirname, "..", "..", "tmp", "arquivos"));
         },
         filename: (request, file, cb) => {
             (0, crypto_1.randomBytes)(10, (err, hash) => {
                 if (err)
-                    cb(err, '');
+                    cb(err);
+                file.key = `${hash.toString("hex")}-${file.originalname}`;
+                console.log(file.key);
+                cb(null, file.key);
             });
         }
     }),
@@ -32,27 +35,29 @@ const storageFile = {
                 if (err)
                     callback(err);
                 const filename = `${hash.toString("hex")}-${file.originalname}`;
+                print(filename);
                 callback(null, filename);
             });
         }
-    })
+    }),
 };
 module.exports = {
-    dest: path_1.default.resolve(__dirname, "..", "..", "tmp", "files"),
-    storage: storageFile['local'],
+    dest: path_1.default.resolve(__dirname, "..", "..", "tmp", "arquivos"),
+    storage: storageFile[process.env.STORAGE],
     limits: {
         fileSize: 5 * 1024 * 1024,
     },
     fileFilter: (request, file, callback) => {
         const allow = [
-            "files/pdf"
+            "arquivos/pdf",
         ];
-        if (allow.includes(file.mimetype)) {
+        if (!allow.includes(file.mimetype)) {
+            console.log(process.env.AWS_BUCKET);
             callback(null, true);
         }
         else {
             callback(new Error("Arquivo inválido"));
         }
-    }
+    },
 };
 //# sourceMappingURL=s3.config.js.map

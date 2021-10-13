@@ -9,14 +9,13 @@ interface ILicitacaoRequest {
     dataInicio: string;
     dataFinal: string;
     dataAmm: string;
-    link: string;
+    urllic: string;
 }
 
-export async function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, link }: ILicitacaoRequest) {
+export async function register({ codlic, numlic, categoria, descricao, dataInicio, dataFinal, dataAmm, urllic }: ILicitacaoRequest) {
     const licitacao = await prisma.licitacao.findFirst({
         where: {
-            CODLIC: codlic,
-            NUM_LIC: numlic
+            CODLIC: codlic
         }
     });
     if (licitacao) {
@@ -24,8 +23,10 @@ export async function register({ codlic, numlic, categoria, descricao, dataInici
     }
     return await prisma.licitacao.create({
         data: {
-            CODLIC: codlic, NUM_LIC: numlic, CATEGORIA: categoria, DESCRICAO: descricao, DATA_INICIO: dataInicio, DATA_FINAL: dataFinal, DATA_AMM: dataAmm, LINK: link
+            CODLIC: codlic, NUM_LIC: numlic, CATEGORIA: categoria, DESCRICAO: descricao, DATA_INICIO: dataInicio, DATA_FINAL: dataFinal, DATA_AMM: dataAmm, LINK: urllic
         }
-    });
+    }).catch((err) => {
+        console.log(err);
+    })
 
 }
