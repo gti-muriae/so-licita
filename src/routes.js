@@ -5,7 +5,7 @@ import { registerPrefeitura } from "./controller/PrefeituraController";
 import { createUsuarioRup, signUsuarioRup } from "./controller/UsuarioRupController";
 import { updateLink } from "./services/licitacao";
 
-const router = Router();
+export const router = Router();
 
 
 //UsuarioRup
@@ -34,6 +34,4 @@ router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, re
 
 });
 
-export {
-    router
-};
+

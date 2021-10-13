@@ -16,17 +16,16 @@ const LicitacaoController_1 = require("./controller/LicitacaoController");
 const PrefeituraController_1 = require("./controller/PrefeituraController");
 const UsuarioRupController_1 = require("./controller/UsuarioRupController");
 const licitacao_1 = require("./services/licitacao");
-const router = (0, express_1.Router)();
-exports.router = router;
+exports.router = (0, express_1.Router)();
 //UsuarioRup
-router.post('/usuario/cadastrado', UsuarioRupController_1.createUsuarioRup);
-router.post('/usuario/login', UsuarioRupController_1.signUsuarioRup);
+exports.router.post('/usuario/cadastrado', UsuarioRupController_1.createUsuarioRup);
+exports.router.post('/usuario/login', UsuarioRupController_1.signUsuarioRup);
 //prefeitura
-router.post('/prefeitura/register', PrefeituraController_1.registerPrefeitura);
+exports.router.post('/prefeitura/register', PrefeituraController_1.registerPrefeitura);
 //Licitação
-router.post("/licitacao/registro", LicitacaoController_1.registerLicitacao);
+exports.router.post("/licitacao/registro", LicitacaoController_1.registerLicitacao);
 //uploadS3
-router.post('/licitacao/upload/:codlic', s3_config_1.uploadS3.single('file'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.post('/licitacao/upload/:codlic', s3_config_1.uploadS3.single('file'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { location: url = "" } = req.file;
     const { codlic } = req.params;
     yield (0, licitacao_1.updateLink)(parseInt(codlic), url).then((index) => {
