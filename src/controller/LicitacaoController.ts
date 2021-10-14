@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { register } from "../services/licitacao";
+import {Request, Response} from "express";
+import {register} from "../services/licitacao";
 
 export async function registerLicitacao(request: Request, response: Response) {
     const licitacao = await register(

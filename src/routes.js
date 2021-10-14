@@ -4,10 +4,10 @@ import { registerLicitacao } from "./controller/LicitacaoController";
 import { registerPrefeitura } from "./controller/PrefeituraController";
 import { createUsuarioRup, signUsuarioRup } from "./controller/UsuarioRupController";
 import { updateLink } from "./services/licitacao";
+import BullBoard from 'bull-board';
 
-
-
-
+const Queue = require('./lib/Queue');
+BullBoard.setQueues(Queue.queues.map((queue) => queue.bull));
 export const router = Router();
 
 
@@ -34,7 +34,7 @@ router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, re
         return res.status(400).json("Error upload");
     });
 });
-
+router.use('/admin', BullBoard.UI);
 
 
 
