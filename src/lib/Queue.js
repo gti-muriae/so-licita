@@ -1,7 +1,8 @@
-import Queue from "bull";
+const Queue = require('bull');
 
-import * as redis from '../config/redis.config';
-import * as works from '../work';
+const redis = require('../config/redis.config');
+const works = require('../work');
+
 
 
 const queues = Object.values(works).map(work => ({
@@ -18,6 +19,10 @@ module.exports = {
         return this.queues.forEach(queue => {
             queue.bull.process(queue.handle);
 
+            queue.bull.on('completed', (work, err) => {
+
+                console.log('Work complete with sucess ', queue.key, work.data);
+            });
             queue.bull.on('failed', (work, err) => {
                 console.log('Work Falied', queue.key, work.data)
                 console.log(err);
@@ -26,4 +31,8 @@ module.exports = {
 
         });
     }
+}
+
+export function add(arg0, arg1) {
+    throw new Error("Function not implemented.");
 }

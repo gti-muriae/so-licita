@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon start build/index.js",
-    "swagger-autogen": "node ./src/swagger.ts"
+    "start": "npm-run-all -p start:*",
+    "start:server": "nodemon start build/src/index.js",
+    "start:queue": "nodemon  start build/src/queue.js",
+    "swagger-autogen": "node ./src/swagger.ts",
+    "test":"nodemon start build/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,7 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "bull": "^3.29.3",
+    "bull-board": "^0.5.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -25,12 +29,14 @@
     "multer": "^1.4.1",
     "multer-s3": "^2.9.0",
     "nodemailer": "^6.7.0",
+    "npm-run-all": "^4.1.5",
     "swagger-autogen": "^2.11.2",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/bull": "^3.15.5",
+    "@types/bull-board": "^0.6.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",

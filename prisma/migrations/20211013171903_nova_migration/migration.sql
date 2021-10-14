@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `licitacao` MODIFY `LINK` VARCHAR(100);
+ALTER TABLE `licitacao` MODIFY `LINK` VARCHAR (100);

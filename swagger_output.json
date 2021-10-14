@@ -20,7 +20,7 @@
         "description": "Endpoint para registro do UsuarioRup",
         "parameters": [
           {
-            "controler":"",
+            "controler": "",
             "apelido": "",
             "senha": "",
             "email": "",
