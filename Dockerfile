@@ -4,9 +4,7 @@ WORKDIR /main
 
 COPY package*.json ./
 
-RUN npm install 
-
-RUN  npm i prisma -g
+RUN npm install && npm i prisma -g
 
 ADD . .
 
