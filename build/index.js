@@ -8,9 +8,10 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const routes_1 = require("./routes");
 const morgan_1 = __importDefault(require("morgan"));
-const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const application = (0, express_1.default)();
+const swaggerFile = require('../swagger_output.json');
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 dotenv_1.default.config();
 application.use((0, morgan_1.default)('dev'));
 application.use(express_1.default.json());
@@ -36,8 +37,7 @@ application.use((err, req, res, next) => {
     });
     return next();
 });
-//salvas arquivos na pasta local
-application.use("/files", express_1.default.static(path_1.default.resolve(__dirname, "..", "tmp", "arquivos")));
+routes_1.router.use('/doc', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerFile));
 application.listen(process.env.PORT, () => {
     console.log(`Server running port  ${process.env.PORT}`);
 });

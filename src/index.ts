@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import path from 'path';
 import cors from 'cors';
 const application: express.Application = express();
+const swaggerFile = require('../swagger_output.json')
+import swaggerUI from 'swagger-ui-express';
 
 dontenv.config();
 application.use(morgan('dev'))
@@ -38,9 +40,7 @@ application.use((err: Error, req: Request, res: Response, next: NextFunction) =>
     return next();
 })
 
-//salvas arquivos na pasta local
-application.use("/files", express.static(path.resolve(__dirname, "..", "tmp", "arquivos")));
-
+router.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
 
 application.listen(process.env.PORT, () => {

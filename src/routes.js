@@ -5,6 +5,9 @@ import { registerPrefeitura } from "./controller/PrefeituraController";
 import { createUsuarioRup, signUsuarioRup } from "./controller/UsuarioRupController";
 import { updateLink } from "./services/licitacao";
 
+
+
+
 export const router = Router();
 
 
@@ -30,8 +33,8 @@ router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, re
     }).catch((err) => {
         return res.status(400).json("Error upload");
     });
-
-
 });
+
+
 
 
