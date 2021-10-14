@@ -17,7 +17,7 @@ export class PrefeituraServices {
             where: { NOME: nome }
         });
         if (prefeitura) {
-            throw new Error('Prefeitura já cadastrada no sistema');
+            throw new Error('Prefeitura ja cadastrada no sistema');
 
         }
         return await prisma.prefeitura.create({

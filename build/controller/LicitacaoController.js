@@ -9,21 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUsuarioRup = exports.createUsuarioRup = void 0;
-const usuarioRup_1 = require("../services/usuarioRup");
-const service = new usuarioRup_1.UsuarioRup();
-function createUsuarioRup(request, response) {
+exports.registerLicitacao = void 0;
+const licitacao_1 = require("../services/licitacao");
+function registerLicitacao(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield service.createUsuario(request.body);
-        return response.status(201).json(user);
+        const licitacao = yield (0, licitacao_1.register)(request.body);
+        return response.status(201).json(licitacao);
     });
 }
-exports.createUsuarioRup = createUsuarioRup;
-function signUsuarioRup(request, response) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const user = yield service.signUSuarioRup(request.body);
-        return response.status(200).json(user);
-    });
-}
-exports.signUsuarioRup = signUsuarioRup;
-//# sourceMappingURL=UsuarioRupController.js.map
+exports.registerLicitacao = registerLicitacao;
+//# sourceMappingURL=LicitacaoController.js.map

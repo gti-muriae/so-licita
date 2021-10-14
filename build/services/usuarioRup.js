@@ -10,7 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuarioRup = void 0;
-const client_1 = require(".prisma/client");
+const client_1 = require("@prisma/client");
+const bcrypt_1 = require("bcrypt");
 const prisma = new client_1.PrismaClient();
 class UsuarioRup {
     createUsuario({ controler, apelido, senha, email, fonecel, cpf, ie, dtabertura, nome, endereco, numEndereco, complemento, bairro, cidade, uf, cep, cod, razaosocial, cnpj }) {
@@ -23,13 +24,34 @@ class UsuarioRup {
             if (userExist) {
                 throw new Error('Usuario ja cadastrado');
             }
+            const hashSenha = (0, bcrypt_1.hashSync)(senha, 10);
             const user = prisma.usuario_rup.create({
                 data: {
-                    CONTROLE: controler, APELIDO: apelido, SENHA: senha, EMAIL: email, FONECEL: fonecel, CPF: cpf, IE: ie, DTABERTURA: dtabertura, NOME: nome, ENDERECO: endereco, NUM_ENDERECO: numEndereco, COMPLEMENTO: complemento,
+                    CONTROLE: controler, APELIDO: apelido, SENHA: hashSenha, EMAIL: email, FONECEL: fonecel, CPF: cpf, IE: ie, DTABERTURA: dtabertura, NOME: nome, ENDERECO: endereco, NUM_ENDERECO: numEndereco, COMPLEMENTO: complemento,
                     BAIRRO: bairro, CIDADE: cidade, UF: uf, CEP: cep, COD: cod, RAZAOSOCIAL: razaosocial, CNPJ: cnpj
                 }
             });
             return user;
+        });
+    }
+    signUSuarioRup({ email, senha }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield prisma.usuario_rup.findFirst({
+                where: {
+                    EMAIL: email
+                }
+            });
+            if (user) {
+                if ((0, bcrypt_1.compareSync)(senha, user.SENHA)) {
+                    return user;
+                }
+                else {
+                    throw new Error('E-mail ou senha incorretos!');
+                }
+            }
+            else {
+                throw new Error('Usuário não encontrado');
+            }
         });
     }
 }

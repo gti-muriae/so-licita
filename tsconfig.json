@@ -11,8 +11,9 @@
         "strict": true
     },
     "include": [
-        "src/**/*.ts"
-    ],
+        "src/**/*.ts",
+        "src/**/*.js"
+, "src/routes.js", "src/config/s3.config.js"    ],
     "exclude": [
         "node_modules"
     ]

@@ -9,21 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUsuarioRup = exports.createUsuarioRup = void 0;
-const usuarioRup_1 = require("../services/usuarioRup");
-const service = new usuarioRup_1.UsuarioRup();
-function createUsuarioRup(request, response) {
+exports.registerPrefeitura = void 0;
+const prefeituraService_1 = require("../services/prefeituraService");
+const service = new prefeituraService_1.PrefeituraServices();
+function registerPrefeitura(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
-        const user = yield service.createUsuario(request.body);
-        return response.status(201).json(user);
+        const prefeitura = yield service.register(request.body);
+        return response.status(201).json(prefeitura);
     });
 }
-exports.createUsuarioRup = createUsuarioRup;
-function signUsuarioRup(request, response) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const user = yield service.signUSuarioRup(request.body);
-        return response.status(200).json(user);
-    });
-}
-exports.signUsuarioRup = signUsuarioRup;
-//# sourceMappingURL=UsuarioRupController.js.map
+exports.registerPrefeitura = registerPrefeitura;
+//# sourceMappingURL=PrefeituraController.js.map

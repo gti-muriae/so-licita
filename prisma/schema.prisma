@@ -29,14 +29,14 @@ model cnae {
 }
 
 model licitacao {
-  CODLIC      Int       @id
-  NUM_LIC     String?   @db.VarChar(30)
-  CATEGORIA   String?   @db.VarChar(30)
-  DESCRICAO   String?   @db.VarChar(30)
-  DATA_INICIO DateTime? @db.Date
-  DATA_FINAL  DateTime? @db.Date
-  DATA_AMM    DateTime? @db.Date
-  LINK        String?   @db.VarChar(50)
+  CODLIC      Int     @id
+  NUM_LIC     String? @db.VarChar(30)
+  CATEGORIA   String? @db.VarChar(30)
+  DESCRICAO   String? @db.VarChar(30)
+  DATA_INICIO String? @db.VarChar(30)
+  DATA_FINAL  String? @db.VarChar(30)
+  DATA_AMM    String? @db.VarChar(30)
+  LINK        String? @db.VarChar(100)
 }
 
 model permissaopagina {
