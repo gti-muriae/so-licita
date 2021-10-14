@@ -13,7 +13,7 @@
     "include": [
         "src/**/*.ts",
         "src/**/*.js"
-, "src/routes.js", "src/config/s3.config.js"    ],
+, "src/routes.js", "src/config/s3.config.js", "src/config/mail.config.JS"    ],
     "exclude": [
         "node_modules"
     ]

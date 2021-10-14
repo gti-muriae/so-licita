@@ -1,8 +1,10 @@
 version: '3.1'
 
 services:
+
   db:
     image: mariadb
+    container_name: database_mariadb
     restart: always
     environment:
     - MYSQL_ROOT_PASSWORD=docker
@@ -11,3 +13,13 @@ services:
 
     volumes:
       - ./mariadb_data:/var/lib/mysql
+
+  redis:
+    image: "redis:alpine"
+    ports:
+     - "6379:6379"
+    environment:
+     - REDIS_REPLICATION_MODE=master 
+    
+
+
