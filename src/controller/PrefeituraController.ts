@@ -1,9 +1,9 @@
-import {Request, Response} from "express";
-import {PrefeituraServices} from "../services/prefeituraService";
+import { Request, Response } from "express";
+import { registerPre } from "../services/prefeituraService";
 
-const service = new PrefeituraServices();
+
 
 export async function registerPrefeitura(request: Request, response: Response) {
-    const prefeitura = await service.register(request.body);
+    const prefeitura = await registerPre(request.body);
     return response.status(201).json(prefeitura);
 }

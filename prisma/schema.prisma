@@ -39,6 +39,7 @@ model licitacao {
   LINK        String? @db.VarChar(100)
 }
 
+
 model permissaopagina {
   CODTELA    Int     @id
   CODUSUARIO Int?
