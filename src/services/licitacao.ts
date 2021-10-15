@@ -1,6 +1,6 @@
 import { PrismaClient } from ".prisma/client";
 
-import Queue from '../lib/Queue';
+const Queue = require('../lib/Queue');
 
 const prisma = new PrismaClient();
 
@@ -15,7 +15,7 @@ interface ILicitacaoRequest {
     urllic: string;
 }
 
-async function register({
+export async function registerLic({
     codlic,
     numlic,
     categoria,
@@ -24,7 +24,7 @@ async function register({
     dataFinal,
     dataAmm,
     urllic
-}: ILicitacaoRequest) {
+}: ILicitacaoRequest): Promise<void> {
     const licitacao = await prisma.licitacao.findFirst({
         where: {
             CODLIC: codlic
@@ -34,7 +34,7 @@ async function register({
         throw new Error("Licitação já resgristada no sistema!")
     }
 
-    return await prisma.licitacao.create({
+    await prisma.licitacao.create({
         data: {
             CODLIC: codlic,
             NUM_LIC: numlic,
@@ -46,19 +46,14 @@ async function register({
             LINK: urllic
         }
     }).then(async (index) => {
-
-        console.log(index.CODLIC);
-
-
-
+        return index;
     }).catch((err) => {
         console.log(err);
     })
 
 }
 
-async function updateLink(codlic: number, url: string): Promise<void> {
-
+export async function updateLink(codlic: number, url: string): Promise<void> {
 
     await prisma.licitacao.update({
         where: {
@@ -74,6 +69,8 @@ async function updateLink(codlic: number, url: string): Promise<void> {
             }
 
             await Queue.add('NotificationEmail', { dados });
+            await Queue.add('NotificationPush', { dados });
+
         });
 
         return index;
@@ -85,8 +82,4 @@ async function updateLink(codlic: number, url: string): Promise<void> {
 
 }
 
-export {
-    register
-    , updateLink
-}
 

@@ -1,18 +1,23 @@
-import {Request, Response} from "express";
-import {UsuarioRup} from "../services/usuarioRup";
+import { Request, Response } from "express";
+import { createUsuario, signUSuarioRup } from "../services/usuarioRup";
 
-const service = new UsuarioRup();
+
+
 
 export async function createUsuarioRup(request: Request, response: Response) {
 
-    const user = await service.createUsuario(request.body);
-    return response.status(201).json(user);
-
+    await createUsuario(request.body).then((index) => {
+        return response.status(201).json(index);
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 export async function signUsuarioRup(request: Request, response: Response) {
-    const user = await service.signUSuarioRup(request.body);
-    return response.status(200).json(user);
-
+    await signUSuarioRup(request.body).then((index) => {
+        return response.status(200).json(index);
+    }).catch((err) => { 
+        console.log(err);
+    })
 }
 

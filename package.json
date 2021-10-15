@@ -8,7 +8,7 @@
     "start:server": "nodemon start build/src/index.js",
     "start:queue": "nodemon  start build/src/queue.js",
     "swagger-autogen": "node ./src/swagger.ts",
-    "test":"nodemon start build/src/index.js"
+    "test": "nodemon start build/src/index.js"
   },
   "keywords": [],
   "author": "",

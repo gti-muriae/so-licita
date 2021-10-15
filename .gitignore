@@ -106,3 +106,4 @@ dist
 
 prisma/migrations
 build
+firebase_config.json

@@ -24,7 +24,7 @@ module.exports = {
                 console.log('Work complete with sucess ', queue.key, work.data);
             });
             queue.bull.on('failed', (work, err) => {
-                console.log('Work Falied', queue.key, work.data)
+                console.log('Work Falied', queue.name, work.data)
                 console.log(err);
             });
 
@@ -33,6 +33,4 @@ module.exports = {
     }
 }
 
-export function add(arg0, arg1) {
-    throw new Error("Function not implemented.");
-}
+
