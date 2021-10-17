@@ -87,6 +87,7 @@ model usuario_rup {
   COD          Int
   RAZAOSOCIAL  String? @db.VarChar(50)
   CNPJ         String? @db.VarChar(20)
+  FCMTOKEN     String?  @db.VarChar(100)
 
   @@id([CONTROLE, COD])
 }

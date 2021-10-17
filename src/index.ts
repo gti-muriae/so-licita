@@ -12,7 +12,6 @@ import swaggerFile from '../swagger_output.json';
 const application: express.Application = express();
 
 
-
 dontenv.config();
 application.use(morgan('dev'))
 application.use(express.json());
