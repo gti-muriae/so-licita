@@ -108,5 +108,15 @@ export async function signUSuarioRup({ email, senha }: IUserRequest): Promise<vo
     });
 
 
+
 }
 
+export async function getUsuarioRup(): Promise<void> {
+    await prisma.usuario_rup.findMany().then((index) => {
+        return index;
+
+    }).catch((err) => {
+        console.log(err);
+        throw new Error('Houve um error ao buscar informações')
+    });
+}
