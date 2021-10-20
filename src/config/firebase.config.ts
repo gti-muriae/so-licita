@@ -6,4 +6,11 @@ admin.initializeApp({
     credential: admin.credential.cert(firebaseAuth)
 });
 
-export { admin }
+async function getConfigRemote() {
+    let remoteConfig = admin.remoteConfig();
+    const key = remoteConfig.getTemplate();
+   key.then((index)=>{
+       console.log(index);
+   });
+}
+export { admin, getConfigRemote }

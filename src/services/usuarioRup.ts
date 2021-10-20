@@ -78,7 +78,7 @@ export async function createUsuario({
             CEP: cep,
             COD: cod,
             RAZAOSOCIAL: razaosocial,
-            CNPJ: cnpj, FCMTOKEN: fcmToken
+            CNPJ: cnpj
         }
     }).then((index) => {
         return index;
@@ -110,12 +110,3 @@ export async function signUSuarioRup({ email, senha }: IUserRequest): Promise<vo
 
 }
 
-export async function updateFmcToken(fcmToken: string, controler_cod: any): Promise<void> {
-    await prisma.usuario_rup.update({
-        where: {
-            CONTROLE_COD: controler_cod
-        }, data: {
-            FCMTOKEN:
-        }
-    })
-}
