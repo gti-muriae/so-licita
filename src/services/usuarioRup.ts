@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
-import { compareSync, hashSync } from "bcrypt";
 
-const prisma = new PrismaClient();
+import { compareSync, hashSync } from "bcrypt";
+import { prisma } from "../export.spec";
+
 
 interface IUserRequest {
     controler: number;
@@ -23,11 +23,11 @@ interface IUserRequest {
     cod: number;
     razaosocial: string;
     cnpj: string;
+    fcmToken: string;
 }
 
 
-export async function createUsuario({
-    controler,
+async function createUsuario({
     apelido,
     senha,
     email,
@@ -45,11 +45,11 @@ export async function createUsuario({
     cep,
     cod,
     razaosocial,
-    cnpj
+    cnpj, fcmToken
 }: IUserRequest): Promise<void> {
     const userExist = await prisma.usuario_rup.findFirst({
         where: {
-            CONTROLE: controler,
+            email: email,
 
         }
     });
@@ -59,25 +59,24 @@ export async function createUsuario({
     const hashSenha = hashSync(senha, 10);
     await prisma.usuario_rup.create({
         data: {
-            CONTROLE: controler,
-            APELIDO: apelido,
-            SENHA: hashSenha,
-            EMAIL: email,
-            FONECEL: fonecel,
-            CPF: cpf,
-            IE: ie,
-            DTABERTURA: dtabertura,
-            NOME: nome,
-            ENDERECO: endereco,
-            NUM_ENDERECO: numEndereco,
-            COMPLEMENTO: complemento,
-            BAIRRO: bairro,
-            CIDADE: cidade,
-            UF: uf,
-            CEP: cep,
-            COD: cod,
-            RAZAOSOCIAL: razaosocial,
-            CNPJ: cnpj
+            apelido: apelido,
+            senha: hashSenha,
+            email: email,
+            contato: fonecel,
+            cod_CPF: cpf,
+            ie: ie,
+            dat_Abertura: dtabertura,
+            nome: nome,
+            endereco: endereco,
+            numero: numEndereco,
+            complemento: complemento,
+            bairro: bairro,
+            cidade: cidade,
+            uf: uf,
+            cod_CEP: cep,
+            raz_Social: razaosocial,
+            cod_CNPJ: cnpj,
+            fmc_Token: fcmToken
         }
     }).then((index) => {
         return index;
@@ -87,14 +86,14 @@ export async function createUsuario({
 
 }
 
-export async function signUSuarioRup({ email, senha }: IUserRequest): Promise<void> {
+async function signUSuarioRup({ email, senha }: IUserRequest): Promise<void> {
     await prisma.usuario_rup.findFirst({
         where: {
-            EMAIL: email
+            email: email
         }
     }).then((index) => {
         if (index) {
-            if (compareSync(senha, index.SENHA!)) {
+            if (compareSync(senha, index.senha!)) {
                 return index;
             } else {
                 throw new Error('E-mail ou senha incorretos!')
@@ -107,5 +106,26 @@ export async function signUSuarioRup({ email, senha }: IUserRequest): Promise<vo
     });
 
 
+
 }
 
+async function getUsuarioRup(): Promise<void> {
+    await prisma.usuario_rup.findMany().then((index) => {
+        return index;
+
+    }).catch((err) => {
+        console.log(err);
+        throw new Error('Houve um error ao buscar informações')
+    });
+}
+async function updateFMCToken(id: number, fcmToken: string): Promise<void> {
+    await prisma.usuario_rup.update({
+        where: { id_Usuario: id }, data: {
+            fmc_Token: fcmToken
+        }
+    }).then((index) => {
+        return index;
+    }).catch((err) => { throw new Error('Houve um error ao Atualizar informações') })
+}
+
+export { getUsuarioRup, signUSuarioRup, createUsuario,updateFMCToken }

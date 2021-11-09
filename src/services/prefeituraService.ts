@@ -1,6 +1,6 @@
-import { PrismaClient } from ".prisma/client";
+import { prisma } from "../export.spec";
 
-const prisma = new PrismaClient();
+
 
 interface IPrefeituraRequest {
     codPrefeitura: number;
@@ -15,7 +15,6 @@ interface IPrefeituraRequest {
 }
 
 export async function registerPre({
-    codPrefeitura,
     nome,
     endereco,
     numEndereco,
@@ -26,22 +25,21 @@ export async function registerPre({
     cep
 }: IPrefeituraRequest): Promise<void> {
     const prefeitura = await prisma.prefeitura.findFirst({
-        where: { NOME: nome }
+        where: { nome: nome }
     });
     if (prefeitura) {
         throw new Error('Prefeitura ja cadastrada no sistema');
     }
     await prisma.prefeitura.create({
         data: {
-            CODPREFEITURA: codPrefeitura,
-            NOME: nome,
-            ENDEDRECO: endereco,
-            NUM_ENDERECO: numEndereco,
-            COMPLEMENTO: complemento,
-            BAIRRO: bairro,
-            CIDADE: cidade,
-            UF: uf,
-            CEP: cep
+            nome: nome,
+            endereco: endereco,
+            numero: numEndereco,
+            complemento: complemento,
+            bairro: bairro,
+            cidade: cidade,
+            uf: uf,
+            cod_CEP: cep
         }
     }).then((index) => {
         return index;

@@ -24,69 +24,66 @@ model classifica {
 }
 
 model cnae {
-  COD       Int     @id
-  DESCRICAO String? @db.VarChar(30)
+  id       Int     @id
+  desc String? @db.VarChar(30)
 }
 
 model licitacao {
-  CODLIC      Int     @id
-  NUM_LIC     String? @db.VarChar(30)
-  CATEGORIA   String? @db.VarChar(30)
-  DESCRICAO   String? @db.VarChar(30)
-  DATA_INICIO String? @db.VarChar(30)
-  DATA_FINAL  String? @db.VarChar(30)
-  DATA_AMM    String? @db.VarChar(30)
-  LINK        String? @db.VarChar(100)
+  cod_Licit    Int     @id @default(autoincrement())
+  num_Licit    String? @db.VarChar(30)
+  id_Categoria Int
+  desc         String? @db.VarChar(30)
+  dat_Inicio   String? @db.VarChar(30)
+  dat_Final    String? @db.VarChar(30)
+  dat_Amm      String? @db.VarChar(30)
+  url_PDF      String? @db.VarChar(100)
 }
 
-
 model permissaopagina {
-  CODTELA    Int     @id
-  CODUSUARIO Int?
-  VERTELA    String? @db.VarChar(30)
+  id          Int     @id @default(autoincrement())
+  cod_Usuario Int?
+  tela        String? @db.VarChar(30)
 }
 
 model prefeitura {
-  CODPREFEITURA           Int     @id
-  NOME                    String? @db.VarChar(30)
-  ENDEDRECO               String? @db.VarChar(30)
-  NUM_ENDERECO            Int?
-  COMPLEMENTO             String? @db.VarChar(30)
-  BAIRRO                  String? @db.VarChar(30)
-  CIDADE                  String? @db.VarChar(30)
-  UF                      String? @db.VarChar(30)
-  CEP                     Int?
-  fk_usuario_rup_CONTROLE Int?
-  fk_usuario_rup_COD      Int?
+  cod_Prefeitura Int     @id @default(autoincrement())
+  nome           String? @db.VarChar(30)
+  endereco       String? @db.VarChar(30)
+  numero         Int?
+  complemento    String? @db.VarChar(30)
+  bairro         String? @db.VarChar(30)
+  cidade         String? @db.VarChar(30)
+  uf             String? @db.VarChar(30)
+  cod_CEP        Int?
 }
 
 model telas {
-  CODTELA Int     @id
-  NOMEJS  String? @db.VarChar(30)
-  TITULO  String? @db.VarChar(30)
-  ICONE   String? @db.VarChar(30)
+  id     Int     @id @default(autoincrement())
+  nome   String? @db.VarChar(30)
+  titulo String? @db.VarChar(30)
+  icon   String? @db.VarChar(30)
 }
 
 model usuario_rup {
-  CONTROLE     Int
-  APELIDO      String? @db.VarChar(30)
-  SENHA        String? @db.VarChar(100)
-  EMAIL        String? @db.VarChar(30)
-  FONECEL      String? @db.VarChar(9)
-  CPF          String? @db.VarChar(12)
-  IE           Int?
-  DTABERTURA   String? @db.VarChar(20)
-  NOME         String? @db.VarChar(30)
-  ENDERECO     String? @db.VarChar(30)
-  NUM_ENDERECO Int?
-  COMPLEMENTO  String? @db.VarChar(30)
-  BAIRRO       String? @db.VarChar(30)
-  CIDADE       String? @db.VarChar(20)
-  UF           String? @db.VarChar(2)
-  CEP          Int?
-  COD          Int
-  RAZAOSOCIAL  String? @db.VarChar(50)
-  CNPJ         String? @db.VarChar(20)
+  id_Usuario   Int     @id @default(autoincrement())
+  apelido      String? @db.VarChar(30)
+  senha        String? @db.VarChar(100)
+  email        String? @db.VarChar(30)
+  contato      String? @db.VarChar(9)
+  cod_CPF      String? @db.VarChar(12)
+  ie           Int?
+  dat_Abertura String? @db.VarChar(20)
+  nome         String? @db.VarChar(30)
+  endereco     String? @db.VarChar(30)
+  numero       Int?
+  complemento  String? @db.VarChar(30)
+  bairro       String? @db.VarChar(30)
+  cidade       String? @db.VarChar(20)
+  uf           String? @db.VarChar(2)
+  cod_CEP      Int?
+  raz_Social   String? @db.VarChar(50)
+  cod_CNPJ     String? @db.VarChar(20)
+  fmc_Token    String? @db.VarChar(100)
 
-  @@id([CONTROLE, COD])
+
 }

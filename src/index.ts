@@ -6,11 +6,12 @@ import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import { router } from './routes';
 import swaggerFile from '../swagger_output.json';
+import { getConfigRemote } from './config/firebase.config';
+getConfigRemote();
 
 
 
 const application: express.Application = express();
-
 
 
 dontenv.config();
