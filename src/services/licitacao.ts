@@ -1,13 +1,8 @@
-import { PrismaClient } from ".prisma/client";
-
-const Queue = require('../lib/Queue');
-
-const prisma = new PrismaClient();
-
+import { prisma } from "../export.spec";
 interface ILicitacaoRequest {
     codlic: number;
     numlic: string;
-    categoria: string;
+    categoria: number;
     descricao: string;
     dataInicio: string;
     dataFinal: string;
@@ -15,7 +10,7 @@ interface ILicitacaoRequest {
     urllic: string;
 }
 
-export async function registerLic({
+async function registerLic({
     codlic,
     numlic,
     categoria,
@@ -27,7 +22,7 @@ export async function registerLic({
 }: ILicitacaoRequest): Promise<void> {
     const licitacao = await prisma.licitacao.findFirst({
         where: {
-            CODLIC: codlic
+            cod_Licit: codlic
         }
     });
     if (licitacao) {
@@ -36,14 +31,14 @@ export async function registerLic({
 
     await prisma.licitacao.create({
         data: {
-            CODLIC: codlic,
-            NUM_LIC: numlic,
-            CATEGORIA: categoria,
-            DESCRICAO: descricao,
-            DATA_INICIO: dataInicio,
-            DATA_FINAL: dataFinal,
-            DATA_AMM: dataAmm,
-            LINK: urllic
+            cod_Licit: codlic,
+            num_Licit: numlic,
+            id_Categoria: categoria,
+            desc: descricao,
+            dat_Inicio: dataInicio,
+            dat_Final: dataFinal,
+            dat_Amm: dataAmm,
+            url_PDF: urllic
         }
     }).then(async (index) => {
         return index;
@@ -53,24 +48,19 @@ export async function registerLic({
 
 }
 
-export async function updateLink(codlic: number, url: string): Promise<void> {
+async function updateLink(codlic: number, url: string): Promise<void> {
 
     await prisma.licitacao.update({
         where: {
-            CODLIC: codlic
+            cod_Licit: codlic
         }, data: {
-            LINK: url
+            url_PDF: url
         }
     }).then(async (index) => {
         const data = await prisma.usuario_rup.findMany();
         data.forEach(async (e) => {
-            const dados = {
-                name: e.APELIDO, mail: e.EMAIL
-            }
 
-            await Queue.add('NotificationEmail', { dados });
-            await Queue.add('NotificationPush', { dados });
-
+            console.log(e.email);
         });
 
         return index;
@@ -79,7 +69,6 @@ export async function updateLink(codlic: number, url: string): Promise<void> {
         throw new Error('Houve um error ao atualizar link do arquivo');
     });
 
-
 }
 
-
+export { updateLink, registerLic }

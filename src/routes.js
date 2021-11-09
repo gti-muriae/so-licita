@@ -2,19 +2,19 @@ import { Router } from "express";
 import { uploadS3 } from './config/s3.config';
 import { getUsuario, registerLicitacao } from "./controller/LicitacaoController";
 import { registerPrefeitura } from "./controller/PrefeituraController";
-import { createUsuarioRup, signUsuarioRup } from "./controller/UsuarioRupController";
+import { createUsuarioRup, signUsuarioRup, updateToken } from "./controller/UsuarioRupController";
 import { updateLink } from "./services/licitacao";
-import BullBoard from 'bull-board';
 
-const Queue = require('./lib/Queue');
-BullBoard.setQueues(Queue.queues.map((queue) => queue.bull));
+
+
 export const router = Router();
 
 
 //UsuarioRup
 router.post('/usuario/cadastrado', createUsuarioRup);
 router.post('/usuario/login', signUsuarioRup);
-router.get('/usuario',getUsuario);
+router.get('/usuario', getUsuario);
+router.put('/usuario/token/update', updateToken)
 
 //prefeitura
 router.post('/prefeitura/register', registerPrefeitura);
@@ -37,7 +37,7 @@ router.post('/licitacao/upload/:codlic', uploadS3.single('file'), async (req, re
         return res.status(400).json("Error upload");
     });
 });
-router.use('/admin', BullBoard.UI);
+
 
 
 
