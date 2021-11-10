@@ -109,14 +109,12 @@ async function signUSuarioRup({ email, senha }: IUserRequest): Promise<void> {
 
 }
 
-async function getUsuarioRup(): Promise<void> {
-    await prisma.usuario_rup.findMany().then((index) => {
-        return index;
-
-    }).catch((err) => {
-        console.log(err);
-        throw new Error('Houve um error ao buscar informações')
-    });
+async function getUsuarioRup() {
+    try {
+        const list = await prisma.usuario_rup.findMany();
+        return list;
+    } catch (e) { }
+    throw new Error('Houve um error ao buscar informações')
 }
 async function updateFMCToken(id: number, fcmToken: string): Promise<void> {
     await prisma.usuario_rup.update({
@@ -128,4 +126,4 @@ async function updateFMCToken(id: number, fcmToken: string): Promise<void> {
     }).catch((err) => { throw new Error('Houve um error ao Atualizar informações') })
 }
 
-export { getUsuarioRup, signUSuarioRup, createUsuario,updateFMCToken }
+export { getUsuarioRup, signUSuarioRup, createUsuario, updateFMCToken }

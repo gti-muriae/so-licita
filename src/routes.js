@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { uploadS3 } from './config/s3.config';
-import { getUsuario, registerLicitacao } from "./controller/LicitacaoController";
+import { getUsuario, registerLicitacao, searchLictCategoria } from "./controller/LicitacaoController";
 import { registerPrefeitura } from "./controller/PrefeituraController";
 import { createUsuarioRup, signUsuarioRup, updateToken } from "./controller/UsuarioRupController";
 import { updateLink } from "./services/licitacao";
@@ -21,6 +21,7 @@ router.post('/prefeitura/register', registerPrefeitura);
 
 //Licitação
 router.post("/licitacao/registro", registerLicitacao);
+router.get("/licitacao/categoria/:id", (request, response) => searchLictCategoria(request, response))
 
 
 

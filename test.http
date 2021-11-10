@@ -1,1 +1,5 @@
 GET http://localhost:3000/usuario
+##
+GET http://localhost:3000/licitacao/categoria/1
+
+
