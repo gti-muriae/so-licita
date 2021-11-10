@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { registerLic, searchLicitCat } from "../services/licitacao";
+import { service } from "../providers";
 import { getUsuarioRup } from "../services/usuarioRup";
 
 async function registerLicitacao(request: Request, response: Response): Promise<Response> {
-    console.log(request.body);
-    const licitacao = await registerLic(
+    const licitacao = await service.registerLic(
         request.body
     );
     return response.status(201).json(licitacao);
@@ -17,9 +16,8 @@ async function getUsuario(request: Request, response: Response): Promise<Respons
 }
 async function searchLictCategoria(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const res = await searchLicitCat(parseInt(id))
+    const res = await service.searchLicitCat(parseInt(id))
     return response.status(200).json(res);
-
 }
+export { registerLicitacao, getUsuario, searchLictCategoria };
 
-export { registerLicitacao, getUsuario, searchLictCategoria }
