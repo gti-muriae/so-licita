@@ -24,19 +24,49 @@ model classifica {
 }
 
 model cnae {
-  id       Int     @id
+  id   Int     @id
   desc String? @db.VarChar(30)
 }
 
+model categoria {
+  id               Int                @id @default(autoincrement())
+  desc_Nome        String             @db.VarChar(50)
+  desc             String             @db.VarChar(100)
+  licitacao        licitacao[]
+  usuariocategoria usuariocategoria[]
+}
+
 model licitacao {
-  cod_Licit    Int     @id @default(autoincrement())
-  num_Licit    String? @db.VarChar(30)
-  id_Categoria Int
-  desc         String? @db.VarChar(30)
-  dat_Inicio   String? @db.VarChar(30)
-  dat_Final    String? @db.VarChar(30)
-  dat_Amm      String? @db.VarChar(30)
-  url_PDF      String? @db.VarChar(100)
+  id_Licit       Int            @id @default(autoincrement())
+  num_Licit      String?        @db.VarChar(30)
+  id_Categoria   Int
+  desc           String?        @db.VarChar(30)
+  dat_Inicio     String?        @db.VarChar(30)
+  dat_Final      String?        @db.VarChar(30)
+  dat_Amm        String?        @db.VarChar(30)
+  url_PDF        String?        @db.VarChar(100)
+  categoria      categoria      @relation(fields: [id_Categoria], references: [id])
+  flg_Status     Int
+  usuariolicit   usuariolicit[]
+}
+
+model usuariolicit {
+  id                Int         @id @default(autoincrement())
+  dat_Entrada       String      @db.VarChar(20)
+  flg_Status        Int
+  usuario           usuario_rup @relation(fields: [id_Usuario], references: [id_Usuario])
+  id_Usuario        Int
+  licitacao         licitacao   @relation(fields: [id_Licit], references: [id_Licit])
+  id_Licit Int
+}
+
+model usuariocategoria {
+  id                    Int         @id @default(autoincrement())
+  categoria             categoria   @relation(fields: [id_Categoria], references: [id])
+  id_Categoria          Int
+  usuario               usuario_rup @relation(fields: [id_Usuario], references: [id_Usuario])
+  id_Usuario            Int
+ 
 }
 
 model permissaopagina {
@@ -84,6 +114,6 @@ model usuario_rup {
   raz_Social   String? @db.VarChar(50)
   cod_CNPJ     String? @db.VarChar(20)
   fmc_Token    String? @db.VarChar(100)
-
-
+  usuariocategoria usuariocategoria[]
+  usuariolicit     usuariolicit[]
 }
