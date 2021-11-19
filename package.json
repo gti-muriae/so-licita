@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p start:*",
-    "start:server": "nodemon start build/src/index.js",
+ 
+    "start": "nodemon start dist/src/index.js",
     "start:queue": "nodemon  start build/src/queue.js",
     "swagger-autogen": "node ./src/swagger.ts",
     "test": "nodemon start build/src/index.js"

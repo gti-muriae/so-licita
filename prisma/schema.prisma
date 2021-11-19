@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -30,42 +30,42 @@ model cnae {
 
 model categoria {
   id               Int                @id @default(autoincrement())
-  desc_Nome        String             @db.VarChar(50)
+  desc_nome        String             @db.VarChar(50)
   desc             String             @db.VarChar(100)
   licitacao        licitacao[]
   usuariocategoria usuariocategoria[]
 }
 
 model licitacao {
-  id_Licit       Int            @id @default(autoincrement())
-  num_Licit      String?        @db.VarChar(30)
-  id_Categoria   Int
+  id_licit       Int            @id @default(autoincrement())
+  num_licit      String?        @db.VarChar(30)
+  id_categoria   Int
   desc           String?        @db.VarChar(30)
-  dat_Inicio     String?        @db.VarChar(30)
-  dat_Final      String?        @db.VarChar(30)
-  dat_Amm        String?        @db.VarChar(30)
-  url_PDF        String?        @db.VarChar(100)
-  categoria      categoria      @relation(fields: [id_Categoria], references: [id])
-  flg_Status     Int
+  dat_inicio     String?        @db.VarChar(30)
+  dat_final      String?        @db.VarChar(30)
+  dat_amm        String?        @db.VarChar(30)
+  url_pdf        String?        @db.VarChar(100)
+  categoria      categoria      @relation(fields: [id_categoria], references: [id])
+  flg_status     Int
   usuariolicit   usuariolicit[]
 }
 
 model usuariolicit {
   id                Int         @id @default(autoincrement())
-  dat_Entrada       String      @db.VarChar(20)
-  flg_Status        Int
-  usuario           usuario_rup @relation(fields: [id_Usuario], references: [id_Usuario])
-  id_Usuario        Int
-  licitacao         licitacao   @relation(fields: [id_Licit], references: [id_Licit])
-  id_Licit Int
+  dat_entrada       String      @db.VarChar(20)
+  flg_status        Int
+  usuario           usuario_rup @relation(fields: [id_usuario], references: [id_usuario])
+  id_usuario        Int
+  licitacao         licitacao   @relation(fields: [id_licit], references: [id_licit])
+  id_licit Int
 }
 
 model usuariocategoria {
   id                    Int         @id @default(autoincrement())
-  categoria             categoria   @relation(fields: [id_Categoria], references: [id])
-  id_Categoria          Int
-  usuario               usuario_rup @relation(fields: [id_Usuario], references: [id_Usuario])
-  id_Usuario            Int
+  categoria             categoria   @relation(fields: [id_categoria], references: [id])
+  id_categoria          Int
+  usuario               usuario_rup @relation(fields: [id_usuario], references: [id_usuario])
+  id_usuario            Int
  
 }
 
@@ -84,7 +84,7 @@ model prefeitura {
   bairro         String? @db.VarChar(30)
   cidade         String? @db.VarChar(30)
   uf             String? @db.VarChar(30)
-  cod_CEP        Int?
+  cod_cep        Int?
 }
 
 model telas {
@@ -95,14 +95,14 @@ model telas {
 }
 
 model usuario_rup {
-  id_Usuario   Int     @id @default(autoincrement())
+  id_usuario   Int     @id @default(autoincrement())
   apelido      String? @db.VarChar(30)
   senha        String? @db.VarChar(100)
   email        String? @db.VarChar(30)
   contato      String? @db.VarChar(9)
-  cod_CPF      String? @db.VarChar(12)
+  cod_cpf      String? @db.VarChar(12)
   ie           Int?
-  dat_Abertura String? @db.VarChar(20)
+  dat_abertura String? @db.VarChar(20)
   nome         String? @db.VarChar(30)
   endereco     String? @db.VarChar(30)
   numero       Int?
@@ -110,10 +110,10 @@ model usuario_rup {
   bairro       String? @db.VarChar(30)
   cidade       String? @db.VarChar(20)
   uf           String? @db.VarChar(2)
-  cod_CEP      Int?
-  raz_Social   String? @db.VarChar(50)
-  cod_CNPJ     String? @db.VarChar(20)
-  fmc_Token    String? @db.VarChar(100)
+  cod_cep      Int?
+  raz_social   String? @db.VarChar(50)
+  cod_cnpj     String? @db.VarChar(20)
+  fmc_token    String? @db.VarChar(100)
   usuariocategoria usuariocategoria[]
   usuariolicit     usuariolicit[]
 }

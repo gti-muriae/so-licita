@@ -39,7 +39,7 @@ export async function registerPre({
             bairro: bairro,
             cidade: cidade,
             uf: uf,
-            cod_CEP: cep
+            cod_cep: cep
         }
     }).then((index) => {
         return index;

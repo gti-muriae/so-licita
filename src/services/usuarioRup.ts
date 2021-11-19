@@ -4,7 +4,7 @@ import { prisma } from "../export.spec";
 
 
 interface IUserRequest {
-    controler: number;
+
     apelido: string;
     senha: string;
     email: string;
@@ -63,9 +63,9 @@ async function createUsuario({
             senha: hashSenha,
             email: email,
             contato: fonecel,
-            cod_CPF: cpf,
+            cod_cpf: cpf,
             ie: ie,
-            dat_Abertura: dtabertura,
+            dat_abertura: dtabertura,
             nome: nome,
             endereco: endereco,
             numero: numEndereco,
@@ -73,10 +73,10 @@ async function createUsuario({
             bairro: bairro,
             cidade: cidade,
             uf: uf,
-            cod_CEP: cep,
-            raz_Social: razaosocial,
-            cod_CNPJ: cnpj,
-            fmc_Token: fcmToken
+            cod_cep: cep,
+            raz_social: razaosocial,
+            cod_cnpj: cnpj,
+            fmc_token: fcmToken
         }
     }).then((index) => {
         return index;
@@ -118,8 +118,8 @@ async function getUsuarioRup() {
 }
 async function updateFMCToken(id: number, fcmToken: string): Promise<void> {
     await prisma.usuario_rup.update({
-        where: { id_Usuario: id }, data: {
-            fmc_Token: fcmToken
+        where: { id_usuario: id }, data: {
+            fmc_token: fcmToken
         }
     }).then((index) => {
         return index;

@@ -5,7 +5,7 @@ import { createUsuarioRup, signUsuarioRup, updateToken } from "./controller/Usua
 export const router = Router();
 
 //UsuarioRup
-router.post('/usuario/cadastrado', createUsuarioRup);
+router.post('/usuario/registro', createUsuarioRup);
 router.post('/usuario/login', signUsuarioRup);
 router.get('/usuario', getUsuario);
 router.put('/usuario/token/update', updateToken)

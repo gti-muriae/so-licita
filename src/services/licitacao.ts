@@ -23,7 +23,7 @@ export class Licitacao {
         console.log(numlic);
         const licitacao = await prisma.licitacao.findFirst({
             where: {
-                num_Licit: numlic
+                num_licit: numlic
             }
         });
 
@@ -33,31 +33,34 @@ export class Licitacao {
 
         await prisma.licitacao.create({
             data: {
-                num_Licit: numlic,
-                id_Categoria: id_Categoria,
+                num_licit: numlic,
+                id_categoria: id_Categoria,
                 desc: descricao,
-                dat_Inicio: dataInicio,
-                dat_Final: dataFinal,
-                dat_Amm: dataAmm,
-                url_PDF: urllic,
-                flg_Status: 0
+                dat_inicio: dataInicio,
+                dat_final: dataFinal,
+                dat_amm: dataAmm,
+                url_pdf: urllic,
+                flg_status: 0
             }
         }).then(async (index) => {
             const usuario = await prisma.$queryRaw<[]>`SELECT U.email,U.nome FROM usuario_rup U INNER JOIN usuariocategoria UC ON UC.id_Usuario = U.id_Usuario WHERE UC.id_Categoria = ${id_Categoria}`
-            usuario.forEach((snapshot) => {
-                this.mailProvider.sendMail({
-                    to: {
-                        name: snapshot['nome'],
-                        email: snapshot['email']
-                    },
-                    from: {
-                        name: 'Equipe SoLicita',
-                        email: 'solicita@gmail.com'
-                    },
-                    subject: 'Foi cadastrar uma nova licitação',
-                    body: '<p> Entre no Site ou no App para mais Informações.</p>'
-                })
-            })
+            if (usuario) {
+                console.log('Existe');
+                usuario.forEach((snapshot) => {
+                    this.mailProvider.sendMail({
+                        to: {
+                            name: snapshot['nome'],
+                            email: snapshot['email']
+                        },
+                        from: {
+                            name: 'Equipe SoLicita',
+                            email: 'solicita@gmail.com'
+                        },
+                        subject: 'Foi cadastrar uma nova licitação',
+                        body: '<p> Entre no Site ou no App para mais Informações.</p>'
+                    })
+                });
+            }
             return index;
         }).catch((err) => {
             console.log(err);
@@ -69,9 +72,9 @@ export class Licitacao {
 
         await prisma.licitacao.update({
             where: {
-                id_Licit: codlic
+                id_licit: codlic
             }, data: {
-                url_PDF: url
+                url_pdf: url
             }
         }).then(async (index) => {
             const data = await prisma.usuario_rup.findMany();
@@ -91,8 +94,8 @@ export class Licitacao {
 
         const lic = await prisma.licitacao.findMany({
             where: {
-                id_Categoria: id, AND: {
-                    flg_Status: 0
+                id_categoria: id, AND: {
+                    flg_status: 0
                 }
             }
         });
