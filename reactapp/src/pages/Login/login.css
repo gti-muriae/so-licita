@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Oswald', sans-serif;
+}
+body{  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;  
+}
+.container{
+  display: flex;
+  justify-content: center;
+  width:100%;
+  margin-top:100px;
+}
+.login-box{
+  background-color: white;
+  padding: 30px;
+  border-radius: 4%;
+  box-shadow: 3px 3px 1px 0px #00000050;
+}
+h1{
+  text-align: center;
+  
+  margin-bottom: 20px;
+}
+.label-float input{
+    background-color: white;
+  width: 100%;
+  padding: 5px 5px;
+  display: inline-block;
+  border: 0;
+  border-bottom: 1px solid gray;
+  border-radius: 5%;
+  outline: none;
+  font-size: 16px;
+}
+.label-float{
+  position: relative;
+  padding-top: 13px;
+  margin-top:5%;
+  margin-bottom: 5%;  
+}
+.label-float input:focus{
+  border-bottom:1px solid #333f70;
+}
+
+button{
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    outline: none;   
+}
+button:hover{
+    background-color:white;
+    border-color: #333f70;
+    color: black;
+}
+.justify-center{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.Mod{
+  cursor: pointer;
+  color: #333f70;
+}
+
+
