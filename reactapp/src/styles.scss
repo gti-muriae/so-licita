@@ -1,0 +1,71 @@
+.modal{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.quadro{
+    background-color: white;
+    width: 30%;
+    height: 50%;
+    border-radius: 10px;
+}
+.titulo{
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 10px;
+    color: #333f70;
+}
+.subtitulo1{
+    background-color: #333f70;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.subtitulo2{
+    background-color: #333f70;
+    color: white;
+}
+
+.form-modal{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    align-items: center;
+    
+}
+.form-label{
+    padding: 3px 3px 3px 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+input{
+    border-radius: 3px;
+}
+input#NOME{
+    width: 35%;
+}
+input#TEL{
+    width: 25%;
+}
+input#CEL{
+    width: 30%;
+}
+input#EMAIL{
+    width: 86%;
+}
+.teste{
+    display: flex;
+}
+.button1{
+    padding: 11px 54%; 
+    
+}
+.button2{
+    padding: 11px 2%;  
+}
