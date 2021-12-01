@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="df1b871b-8f04-4e50-b842-388ce6309aec" name="Changes" comment="" />
+    <list default="true" id="b0a095ba-cd2f-4c02-acf4-e23901b3f370" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/20211129233307_/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/20211201000216_/migration.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/migrations/migration_lock.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Categoria/registro_categoria_controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Licitacao/registro_licitacao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Usuario/login_usaurio_controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Usuario/registro_usuario_controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/Categoria/registro_categoria.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/Licitacao/registro_licitacao.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/Usuario/login_usuario.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/Usuario/registro_usuario.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LicitacaoController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/PrefeituraController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/UsuarioRupController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/providers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/providers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/licitacao.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/prefeituraService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/usuarioRup.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swagger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/swagger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,26 +41,92 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="20lwtujS80GJeoeIi4nBLjQE45B" />
+  <component name="ProjectId" id="21dcAEHBab5qaVa7eqKLiTjk6eL" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="ts.external.directory.path" value="C:\Users\blade\so-licita\node_modules\typescript\lib" />
+  </component>
+  <component name="RunManager" selected="Docker.Dockerfile">
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="swagger-autogen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="swagger-autogen" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.swagger-autogen" />
+        <item itemvalue="npm.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="df1b871b-8f04-4e50-b842-388ce6309aec" name="Changes" comment="" />
-      <created>1636632708953</created>
+      <changelist id="b0a095ba-cd2f-4c02-acf4-e23901b3f370" name="Changes" comment="" />
+      <created>1638274268721</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1636632708953</updated>
-      <workItem from="1636632713123" duration="13000" />
+      <updated>1638274268721</updated>
+      <workItem from="1638274276579" duration="7000" />
+      <workItem from="1638317405212" duration="3010000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -30,61 +30,61 @@ model cnae {
 
 model categoria {
   id               Int                @id @default(autoincrement())
-  desc_nome        String             @db.VarChar(50)
+  descNome        String             @db.VarChar(50)
   desc             String             @db.VarChar(100)
   licitacao        licitacao[]
   usuariocategoria usuariocategoria[]
 }
 
 model licitacao {
-  id_licit       Int            @id @default(autoincrement())
-  num_licit      String?        @db.VarChar(30)
-  id_categoria   Int
-  desc           String?        @db.VarChar(30)
-  dat_inicio     String?        @db.VarChar(30)
-  dat_final      String?        @db.VarChar(30)
-  dat_amm        String?        @db.VarChar(30)
-  url_pdf        String?        @db.VarChar(100)
-  categoria      categoria      @relation(fields: [id_categoria], references: [id])
-  flg_status     Int
-  usuariolicit   usuariolicit[]
+  id           Int            @id @default(autoincrement())
+  numLicit    String?        @db.VarChar(30)
+  idCategoria Int
+  desc         String?        @db.VarChar(30)
+  datInicio   String?        @db.VarChar(30)
+  datFinal    String?        @db.VarChar(30)
+  datAmm      String?        @db.VarChar(30)
+  urlPdf      String?        @db.VarChar(100)
+  categoria    categoria      @relation(fields: [idCategoria], references: [id])
+  flgStatus   String
+  usuariolicit usuariolicit[]
 }
 
 model usuariolicit {
-  id                Int         @id @default(autoincrement())
-  dat_entrada       String      @db.VarChar(20)
-  flg_status        Int
-  usuario           usuario_rup @relation(fields: [id_usuario], references: [id_usuario])
-  id_usuario        Int
-  licitacao         licitacao   @relation(fields: [id_licit], references: [id_licit])
-  id_licit Int
+  id          Int         @id @default(autoincrement())
+  datEntrada String      @db.VarChar(20)
+  flgStatus  Int
+  usuario     usuario_rup @relation(fields: [idUsuario], references: [id])
+  idUsuario   Int
+  licitacao   licitacao   @relation(fields: [idLicit], references: [id])
+  idLicit     Int
 }
 
 model usuariocategoria {
-  id                    Int         @id @default(autoincrement())
-  categoria             categoria   @relation(fields: [id_categoria], references: [id])
-  id_categoria          Int
-  usuario               usuario_rup @relation(fields: [id_usuario], references: [id_usuario])
-  id_usuario            Int
- 
+  id          Int         @id @default(autoincrement())
+  categoria   categoria   @relation(fields: [idCategoria], references: [id])
+  idCategoria Int
+  usuario     usuario_rup @relation(fields: [idUsuario], references: [id])
+  idUsuario  Int
+
 }
 
 model permissaopagina {
-  id          Int     @id @default(autoincrement())
-  cod_Usuario Int?
-  tela        String? @db.VarChar(30)
+  id         Int     @id @default(autoincrement())
+  codUsuario Int?
+  tela       String? @db.VarChar(30)
 }
 
 model prefeitura {
-  cod_Prefeitura Int     @id @default(autoincrement())
-  nome           String? @db.VarChar(30)
-  endereco       String? @db.VarChar(30)
-  numero         Int?
-  complemento    String? @db.VarChar(30)
-  bairro         String? @db.VarChar(30)
-  cidade         String? @db.VarChar(30)
-  uf             String? @db.VarChar(30)
-  cod_cep        Int?
+  id          Int     @id @default(autoincrement())
+  nome        String? @db.VarChar(30)
+  endereco    String? @db.VarChar(30)
+  numero      Int?
+  complemento String? @db.VarChar(30)
+  bairro      String? @db.VarChar(30)
+  cidade      String? @db.VarChar(30)
+  uf          String? @db.VarChar(30)
+  cod_cep     Int?
 }
 
 model telas {
@@ -95,25 +95,25 @@ model telas {
 }
 
 model usuario_rup {
-  id_usuario   Int     @id @default(autoincrement())
-  apelido      String? @db.VarChar(30)
-  senha        String? @db.VarChar(100)
-  email        String? @db.VarChar(30)
-  contato      String? @db.VarChar(9)
-  cod_cpf      String? @db.VarChar(12)
-  ie           Int?
-  dat_abertura String? @db.VarChar(20)
-  nome         String? @db.VarChar(30)
-  endereco     String? @db.VarChar(30)
-  numero       Int?
-  complemento  String? @db.VarChar(30)
-  bairro       String? @db.VarChar(30)
-  cidade       String? @db.VarChar(20)
-  uf           String? @db.VarChar(2)
-  cod_cep      Int?
-  raz_social   String? @db.VarChar(50)
-  cod_cnpj     String? @db.VarChar(20)
-  fmc_token    String? @db.VarChar(100)
+  id               Int                @id @default(autoincrement())
+  apelido          String?            @db.VarChar(30)
+  senha            String?            @db.VarChar(100)
+  email            String?            @db.VarChar(30)
+  contato          String?            @db.VarChar(9)
+  cpf              String?            @db.VarChar(12)
+  ie               Int?
+  datAbertura      String?            @db.VarChar(20)
+  nome             String?            @db.VarChar(30)
+  endereco         String?            @db.VarChar(30)
+  numero           Int?
+  complemento      String?            @db.VarChar(30)
+  bairro           String?            @db.VarChar(30)
+  cidade           String?            @db.VarChar(20)
+  uf               String?            @db.VarChar(2)
+  codCep           Int?
+  razSocial        String?            @db.VarChar(50)
+  codCnpj          Int
+  fmcToken         String?            @db.VarChar(100)
   usuariocategoria usuariocategoria[]
   usuariolicit     usuariolicit[]
 }

@@ -1,25 +1,24 @@
 import { Router } from "express";
-import { getUsuario, registerLicitacao, searchLictCategoria } from "./controller/LicitacaoController";
-import { registerPrefeitura } from "./controller/PrefeituraController";
-import { createUsuarioRup, signUsuarioRup, updateToken } from "./controller/UsuarioRupController";
-export const router = Router();
+import { registroCategoriaController } from "./controller/Categoria/registro_categoria_controller";
+import { registroLicitacaoController } from "./controller/Licitacao/registro_licitacao";
+import { loginUsuarioController } from "./controller/Usuario/login_usaurio_controller";
+import { registroControllerUsuario } from "./controller/Usuario/registro_usuario_controller";
 
-//UsuarioRup
-router.post('/usuario/registro', createUsuarioRup);
-router.post('/usuario/login', signUsuarioRup);
-router.get('/usuario', getUsuario);
-router.put('/usuario/token/update', updateToken)
+const router = Router();
 
-//prefeitura
-router.post('/prefeitura/register', registerPrefeitura);
+//Usuario
+router.post('/usuario/registro', (request, response) => registroControllerUsuario(request, response));
+router.post('/usuario/login', (request, response) => loginUsuarioController(request, response));
+
 
 //Licitação
-router.post("/licitacao/registro", registerLicitacao);
-router.get("/licitacao/categoria/:id", (request, response) => searchLictCategoria(request, response))
+router.post('/licitacao/registro', (request, response) => registroLicitacaoController(request, response));
 
 
+//Categoria
+router.post('/categoria/registro', (request, response) => registroCategoriaController(request, response));
 
-
+export { router }
 
 
 
