@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { registroCategoriaController } from "./controller/Categoria/registro_categoria_controller";
+import { findLicitacaoPorCategoriaController } from "./controller/Licitacao/find_licitacao_por_categoria";
 import { registroLicitacaoController } from "./controller/Licitacao/registro_licitacao";
 import { loginUsuarioController } from "./controller/Usuario/login_usaurio_controller";
 import { registroControllerUsuario } from "./controller/Usuario/registro_usuario_controller";
@@ -13,6 +14,7 @@ router.post('/usuario/login', (request, response) => loginUsuarioController(requ
 
 //Licitação
 router.post('/licitacao/registro', (request, response) => registroLicitacaoController(request, response));
+router.post('/licitacao/categoria', (request, response) => findLicitacaoPorCategoriaController(request, response))
 
 
 //Categoria

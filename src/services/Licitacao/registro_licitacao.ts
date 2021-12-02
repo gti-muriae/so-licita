@@ -15,7 +15,7 @@ interface ILicitacaoRequest {
 export async function registroLicitacao(data: ILicitacaoRequest): Promise<{}> {
     const licitacao = await prisma.licitacao.findFirst({ where: { numLicit: data.numLicit } });
 
-    if (licitacao?.numLicit == data.numLicit) {
+    if (licitacao) {
         throw new Error('Licitação já cadastrada no sistema!')
     } else {
         return await prisma.licitacao.create({ data: data });
