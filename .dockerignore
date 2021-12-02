@@ -1,4 +1,6 @@
-node_modules
-.env.example
+node_modules 
 src
-mariadb_data
+.idea
+docker-compose.yml
+test.http
+tsconfig.json
