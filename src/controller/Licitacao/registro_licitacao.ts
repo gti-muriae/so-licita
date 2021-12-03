@@ -9,7 +9,7 @@ export async function registroLicitacaoController(request: Request, response: Re
         datFinal,
         datAmm,
         urlPdf,
-        flgStatus } = request.body;
+        flgStatus, idPrefeitura } = request.body;
     try {
         const licitacao = await registroLicitacao({
             numLicit,
@@ -19,7 +19,7 @@ export async function registroLicitacaoController(request: Request, response: Re
             datFinal,
             datAmm,
             urlPdf,
-            flgStatus
+            flgStatus, idPrefeitura
         });
         return response.status(201).json(licitacao);
     } catch (err) {

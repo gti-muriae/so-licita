@@ -10,6 +10,7 @@ interface ILicitacaoRequest {
     datAmm: string;
     urlPdf: string;
     flgStatus: string;
+    idPrefeitura: number;
 
 }
 export async function registroLicitacao(data: ILicitacaoRequest): Promise<{}> {
