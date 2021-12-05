@@ -8,7 +8,6 @@ export async function findLicitacaoPorCategoriaController(request: Request, resp
         return response.status(200).json(licitacao);
 
     } catch (err) {
-
         // @ts-ignoreF
         return response.status(400).json({message : err.message})
 
