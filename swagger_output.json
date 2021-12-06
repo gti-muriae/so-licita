@@ -14,36 +14,81 @@
   "consumes": [],
   "produces": [],
   "paths": {
-    "/usuario/cadastrado": {
+    "/usuario/registro": {
       "post": {
         "tags": [],
-        "description": "Endpoint para registro do UsuarioRup",
+        "description": "",
         "parameters": [
           {
-            "controler": "",
-            "apelido": "",
-            "senha": "",
-            "email": "",
-            "fonecel": "",
-            "cpf": "",
-            "ie": "",
-            "dtabertura": "",
-            "nome": "",
-            "endereco": "",
-            "numEndereco": "",
-            "complemento": "",
-            "bairro": "",
-            "cidade": "",
-            "uf": "",
-            "cep": "",
-            "cod": "",
-            "razaosocial": "",
-            "cnpj": ""
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "apelido": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                },
+                "contato": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "ie": {
+                  "example": "any"
+                },
+                "datAbertura": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "endereco": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "complemento": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "uf": {
+                  "example": "any"
+                },
+                "codCep": {
+                  "example": "any"
+                },
+                "razSocial": {
+                  "example": "any"
+                },
+                "codCnpj": {
+                  "example": "any"
+                },
+                "fcmToken": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -52,22 +97,29 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/prefeitura/register": {
-      "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -77,28 +129,107 @@
         "tags": [],
         "description": "",
         "parameters": [
-          ""
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "numLicit": {
+                  "example": "any"
+                },
+                "idCategoria": {
+                  "example": "any"
+                },
+                "desc": {
+                  "example": "any"
+                },
+                "datInicio": {
+                  "example": "any"
+                },
+                "datFinal": {
+                  "example": "any"
+                },
+                "datAmm": {
+                  "example": "any"
+                },
+                "urlPdf": {
+                  "example": "any"
+                },
+                "flgStatus": {
+                  "example": "any"
+                }
+              }
+            }
+          }
         ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
-    "/licitacao/upload/{codlic}": {
+    "/licitacao/categoria": {
       "post": {
         "tags": [],
         "description": "",
         "parameters": [
           {
-            "name": "codlic",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoria": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/categoria/registro": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descNome": {
+                  "example": "any"
+                },
+                "desc": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
       }
     }
   },

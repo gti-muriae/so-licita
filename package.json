@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon start dist/src/index.js",
     "start:queue": "nodemon  start build/src/queue.js",
-    "swagger-autogen": "node ./src/swagger.ts",
+    "swagger-autogen": "node ./dist/src/swagger.js",
     "test": "nodemon start build/src/index.js"
   },
   "keywords": [],

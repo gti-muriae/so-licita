@@ -30,7 +30,7 @@ model cnae {
 
 model categoria {
   id               Int                @id @default(autoincrement())
-  descNome        String             @db.VarChar(50)
+  descNome         String             @db.VarChar(50)
   desc             String             @db.VarChar(100)
   licitacao        licitacao[]
   usuariocategoria usuariocategoria[]
@@ -38,26 +38,29 @@ model categoria {
 
 model licitacao {
   id           Int            @id @default(autoincrement())
-  numLicit    String?        @db.VarChar(30)
-  idCategoria Int
+  numLicit     String?        @db.VarChar(30)
+  idCategoria  Int
   desc         String?        @db.VarChar(30)
-  datInicio   String?        @db.VarChar(30)
-  datFinal    String?        @db.VarChar(30)
-  datAmm      String?        @db.VarChar(30)
-  urlPdf      String?        @db.VarChar(100)
+  datInicio    String?        @db.VarChar(30)
+  datFinal     String?        @db.VarChar(30)
+  datAmm       String?        @db.VarChar(30)
+  urlPdf       String?        @db.VarChar(100)
   categoria    categoria      @relation(fields: [idCategoria], references: [id])
-  flgStatus   String
+  flgStatus    String
+  idPrefeitura Int
   usuariolicit usuariolicit[]
+
+  prefeitura prefeitura @relation(fields: [idPrefeitura], references: [id])
 }
 
 model usuariolicit {
-  id          Int         @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   datEntrada String      @db.VarChar(20)
   flgStatus  Int
-  usuario     usuario_rup @relation(fields: [idUsuario], references: [id])
-  idUsuario   Int
-  licitacao   licitacao   @relation(fields: [idLicit], references: [id])
-  idLicit     Int
+  usuario    usuario_rup @relation(fields: [idUsuario], references: [id])
+  idUsuario  Int
+  licitacao  licitacao   @relation(fields: [idLicit], references: [id])
+  idLicit    Int
 }
 
 model usuariocategoria {
@@ -65,7 +68,7 @@ model usuariocategoria {
   categoria   categoria   @relation(fields: [idCategoria], references: [id])
   idCategoria Int
   usuario     usuario_rup @relation(fields: [idUsuario], references: [id])
-  idUsuario  Int
+  idUsuario   Int
 
 }
 
@@ -76,15 +79,16 @@ model permissaopagina {
 }
 
 model prefeitura {
-  id          Int     @id @default(autoincrement())
-  nome        String? @db.VarChar(30)
-  endereco    String? @db.VarChar(30)
+  id          Int         @id @default(autoincrement())
+  nome        String?     @db.VarChar(30)
+  endereco    String?     @db.VarChar(30)
   numero      Int?
-  complemento String? @db.VarChar(30)
-  bairro      String? @db.VarChar(30)
-  cidade      String? @db.VarChar(30)
-  uf          String? @db.VarChar(30)
+  complemento String?     @db.VarChar(30)
+  bairro      String?     @db.VarChar(30)
+  cidade      String?     @db.VarChar(30)
+  uf          String?     @db.VarChar(30)
   cod_cep     Int?
+  licitacao   licitacao[]
 }
 
 model telas {

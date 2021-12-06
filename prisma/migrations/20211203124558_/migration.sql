@@ -21,7 +21,7 @@ CREATE TABLE `cnae` (
 -- CreateTable
 CREATE TABLE `categoria` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `desc_nome` VARCHAR(50) NOT NULL,
+    `descNome` VARCHAR(50) NOT NULL,
     `desc` VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -38,6 +38,7 @@ CREATE TABLE `licitacao` (
     `datAmm` VARCHAR(30) NULL,
     `urlPdf` VARCHAR(100) NULL,
     `flgStatus` VARCHAR(191) NOT NULL,
+    `idPrefeitura` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -123,6 +124,9 @@ CREATE TABLE `usuario_rup` (
 
 -- AddForeignKey
 ALTER TABLE `licitacao` ADD CONSTRAINT `licitacao_idCategoria_fkey` FOREIGN KEY (`idCategoria`) REFERENCES `categoria`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `licitacao` ADD CONSTRAINT `licitacao_idPrefeitura_fkey` FOREIGN KEY (`idPrefeitura`) REFERENCES `prefeitura`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `usuariolicit` ADD CONSTRAINT `usuariolicit_idUsuario_fkey` FOREIGN KEY (`idUsuario`) REFERENCES `usuario_rup`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
