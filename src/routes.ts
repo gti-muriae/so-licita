@@ -1,5 +1,6 @@
 import { response, Router } from "express";
 import { registroCategoriaController } from "./controller/Categoria/registro_categoria_controller";
+import { updateCategoriaController } from "./controller/Categoria/update_categoria_controller";
 import { findLicitacaoPorCategoriaController } from "./controller/Licitacao/find_licitacao_por_categoria";
 import { findLicitacaoPorPrefeituraController } from "./controller/Licitacao/find_licitacao_por_prefeitura_controller";
 import { registroLicitacaoController } from "./controller/Licitacao/registro_licitacao";
@@ -13,7 +14,7 @@ const router = Router();
 //Usuario
 router.post('/usuario/registro', (request, response) => registroControllerUsuario(request, response));
 router.post('/usuario/login', (request, response) => loginUsuarioController(request, response));
-router.post('/usuario/categoria',(request,response)=> registroCategoriaDoUsuarioController(request,response));
+router.post('/usuario/categoria', (request, response) => registroCategoriaDoUsuarioController(request, response));
 
 
 //Licitação
@@ -24,6 +25,7 @@ router.get('/licitacao/prefeitura/:cidade', (request, response) => findLicitacao
 
 //Categoria
 router.post('/categoria/registro', (request, response) => registroCategoriaController(request, response));
+router.put('/categoria/update', (request, response) => updateCategoriaController(request, response));
 
 //Prefeitura
 
