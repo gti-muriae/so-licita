@@ -4,13 +4,8 @@ import dontenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
-
 import swaggerFile from '../swagger_output.json';
 import { router } from './routes';
-
-
-
-
 
 const application: express.Application = express();
 
@@ -20,19 +15,15 @@ application.use(morgan('dev'))
 application.use(express.json());
 application.use(express.urlencoded({ extended: true }))
 application.use(router);
-application.use(cors());
+
 application.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 application.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin',
-        '*');
-    res.header('Access-Control-Allow-Header',
-        'Origin,X-Requested-With,Content-Type,Accept,Authorization');
-
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
-        res.status(200).send({})
-    }
+    res.header("Access-Control-Allow-Origin",
+        "*");
+       
+    
+    application.use(cors());
     next();
 });
 
