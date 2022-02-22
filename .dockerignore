@@ -1,6 +1,0 @@
-node_modules 
-src
-.idea
-docker-compose.yml
-test.http
-tsconfig.json
