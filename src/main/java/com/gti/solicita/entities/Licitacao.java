@@ -7,7 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_licitacao")
@@ -26,9 +28,11 @@ public class Licitacao implements Serializable {
     private Date datAmm;
     private String flgStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_licitacao_categoria",
+            joinColumns = @JoinColumn(name = "idLicitação"),
+            inverseJoinColumns = @JoinColumn(name = "idCatgoria"))
+    private Set<Categoria> categorias = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "prefeitura_id")

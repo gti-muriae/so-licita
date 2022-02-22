@@ -21,9 +21,9 @@ public class Categoria implements Serializable {
     private String categoria;
     private String descCategoria;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "categorias",fetch = FetchType.EAGER)
     private Set<UsuarioRup> usuarioRups = new HashSet<>();
 
-    @OneToMany(mappedBy = "categoria")
-    private List<Licitacao> licitacao;
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Licitacao> licitacao = new HashSet<>();
 }

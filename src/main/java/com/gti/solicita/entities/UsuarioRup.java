@@ -49,6 +49,7 @@ public class UsuarioRup implements UserDetails, Serializable {
     @Column(unique = true)
     private Integer codCNPJ;
     private String fcmToken;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_usuario_role", joinColumns =
     @JoinColumn(name = "idUsuario"), inverseJoinColumns =

@@ -48,7 +48,6 @@ public class UsuarioRupDTO implements Serializable {
 
     public UsuarioRupDTO(Long id, String email, String senha, String cpf, String contato, Date datAbertura, String nomeCompleto, String endereco, String numEndereco, String complemento, String bairro, String cidade, String uf, String codCep, String razSocial, Integer codCNPJ, String fcmToken) {
         this.id = id;
-
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
